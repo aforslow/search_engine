@@ -5,24 +5,44 @@ import java.util.LinkedList;
 
 public class TFIDFCalculator {
 
+	/**
+	 * Returns the TF-IDF score according to wikipedia definition
+	 * @param token: The token to calculate for
+	 * @param document: The document to calculate for
+	 * @param documentSet: The search engine's document set
+	 * @return tfidf: the TF-IDF score
+	 */
 	public double calculateTFIDF(Token token, Document document, LinkedList<Document> documentSet) {
 		double tf = calculateTF(token, document);
 		double idf = calculateIDF(token, documentSet);
-		return tf * idf;
+		double tfidf = tf * idf;
+		return tfidf;
 	}
 	
+	/**
+	 * Calculates TF adjusted for document length according to wikipedia definition
+	 * @param token: The token to calculate for
+	 * @param document: The document to calculate for
+	 * @return tf: The term frequency
+	 */
 	public double calculateTF(Token token, Document document) {
-		TFTerm tfTerm = new TFFactory().getTFCalculator("documentNormalization");
-		return tfTerm.calculate(token, document);
-//		double rawCount = document.getTokenRawFrequency(token);
-//		double nWords = document.getNWords();
-//		return rawCount / nWords;
+		double rawCount = document.getTokenRawFrequency(token);
+		double nWords = document.getNWords();
+		double tf = rawCount / nWords;
+		return tf;
 	}
 	
+	/**
+	 * Calculates IDF according to wikipedia definition
+	 * @param token: The token to calculate for
+	 * @param documentSet: The search engine's document set
+	 * @return idf: The IDF calculated according to wikipedia definition
+	 */
 	public double calculateIDF(Token token, LinkedList<Document> documentSet) {
 		double totalNumberOfDocuments = documentSet.size();
 		double nDocumentsContainingToken = getNumberOfDocumentsContainingToken(token, documentSet);
-		return Math.log(totalNumberOfDocuments / (0.0 + nDocumentsContainingToken) ); 
+		double idf = Math.log(totalNumberOfDocuments / (0.0 + nDocumentsContainingToken) );
+		return idf;
 	}
 	
 	private double getNumberOfDocumentsContainingToken(Token token, LinkedList<Document> documentSet) {
@@ -35,7 +55,14 @@ public class TFIDFCalculator {
 		return nDocsContainingToken;
 	}
 	
-	
+	/**
+	 * Sorts a document list according to TFIDF
+	 * @param token: The token to sort according to
+	 * @param documentListToSort: The list to sort
+	 * @param completeDocumentSet: The search engine's document set
+	 * @return drts: A LinkedList containing (Document, tf-idf-rank)-tuples
+	 * sorted according to tf-idf-scores in descending order.
+	 */
 	public LinkedList<DocumentRankTuple> sortDocumentsTFIDF(Token token, 
 			LinkedList<Document> documentListToSort, 
 			LinkedList<Document> completeDocumentSet) {

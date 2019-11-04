@@ -19,6 +19,11 @@ public class InvertedIndexTable {
 		this.documentSet = documentSet;
 	}
 	
+	/**
+	 * Adds a document to the invertedIndexTable; mapping each token in
+	 * the document to the document
+	 * @param doc: The document to add
+	 */
 	public void addDocument(Document doc) {
 		for (Token t : doc.getTokens()) {
 			LinkedList<DocumentRankTuple> emptyDocList = new LinkedList<DocumentRankTuple>();
@@ -29,6 +34,10 @@ public class InvertedIndexTable {
 		}
 	}
 	
+	/**
+	 * Sorts each LinkedList in invertedIndexTable according to TFIDF.
+	 * Thus, each token's LinkedList value gets sorted.
+	 */
 	public void performTFIDFSort() {
 		for (Token t : this.invertedIndexTable.keySet()) {
 			LinkedList<DocumentRankTuple> tokenDocList = this.invertedIndexTable.get(t);
@@ -44,10 +53,16 @@ public class InvertedIndexTable {
 		}
 	}
 	
-	public LinkedList<DocumentRankTuple> getDocumentsFromToken(Token t) {
+	/**
+	 * Gets a LinkedList of (Document, TFIDF-rank) tuples which belong
+	 * to a token t
+	 * @param token: The token key
+	 * @return tokenDocRankMapCopy: a copy of the LinkedList of (Document, TFIDF-rank) tuples
+	 */
+	public LinkedList<DocumentRankTuple> getDocumentsFromToken(Token token) {
 		LinkedList<DocumentRankTuple> tokenDocRankMapCopy = new LinkedList<DocumentRankTuple>();
 		LinkedList<DocumentRankTuple> emptyList = new LinkedList<DocumentRankTuple>();
-		for (DocumentRankTuple d : this.invertedIndexTable.getOrDefault(t, emptyList)) {
+		for (DocumentRankTuple d : this.invertedIndexTable.getOrDefault(token, emptyList)) {
 			tokenDocRankMapCopy.add(new DocumentRankTuple(d));
 		}
 		return tokenDocRankMapCopy;

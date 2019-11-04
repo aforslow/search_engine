@@ -58,14 +58,27 @@ public class Document {
 		return Collections.max(this.tokenFrequencyMap.values());
 	}
 	
+	/**
+	 * Returns the number of occurrences of Token token in this document
+	 * @param token: The token of interest
+	 * @return number of occurrences of Token token in this document
+	 */
 	public int getTokenRawFrequency(Token token) {
 		return tokenFrequencyMap.getOrDefault(token, 0);
 	}
 	
+	/**
+	 * Returns the number of words in this document
+	 * @return n words in this document
+	 */
 	public int getNWords() {
 		return this.tokenSequence.size();
 	}
 	
+	/**
+	 * Returns the maximum number of times a word occurs in this document
+	 * @return maxRawFrequency
+	 */
 	public int getMaxRawFrequency() {
 		return maxRawFrequency;
 	}

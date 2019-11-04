@@ -12,7 +12,12 @@ import com.google.gson.JsonParser;
 
 public class JsonDocumentFileParser {
 	
-	
+	/**
+	 * Parses a json file which contains a list of documents
+	 * @param filepath: The json file path
+	 * @return LinkedList of documents as json strings
+	 * @throws IOException
+	 */
 	public static LinkedList<String> parseFile(String filepath) throws IOException {
 		JsonArray docs = getJsonArray(filepath);
 	    return getDocumentList(docs);

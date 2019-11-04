@@ -56,9 +56,9 @@ public class SearchEngine implements ISearchEngine {
 	}
 	
 	/**
-	 * Returns a list of documents matching term. Each document is ranked by tf-idf
+	 * Returns a string list of documents + TFIDF rank matching term. Each document is ranked by tf-idf.
 	 * @param term: The search term. Has to be a single word.
-	 * @return queryAnswer: The stringified list of documents matching term.
+	 * @return queryAnswer: The stringified list of documents and their tf-idf rank matching term.
 	 */
 	@Override
 	public String searchSingleTermWithRank(String term) {
@@ -70,6 +70,10 @@ public class SearchEngine implements ISearchEngine {
 		return queryAnswer;
 	}
 	
+	/**
+	 * Returns the documents contained in the search engine
+	 * @return LinkedList of documents
+	 */
 	public LinkedList<Document> getDocuments() {
 		LinkedList<Document> docCopies = new LinkedList<Document>();
 		for (Document doc : documents) {
@@ -78,6 +82,12 @@ public class SearchEngine implements ISearchEngine {
 		return docCopies;
 	}
 
+	/**
+	 * Returns a list of documents matching term. Each document is ranked by tf-idf.
+	 * NOTE: rank is not included in return string
+	 * @param term: The search term. Has to be single word.
+	 * @return queryAnswer: the stringified list of documents matching term.
+	 */
 	@Override
 	public String searchSingleTermNoRank(String term) {
 		Token t = new Token(term);

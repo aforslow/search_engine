@@ -36,6 +36,7 @@ public class SearchEngineTest {
 		String term = "brown";
 		String resp = google.searchSingleTermNoRank(term);
 		System.out.println(term + ": " + resp);
+		assertEquals(resp, "[Document 1, Document 2]");
 	}
 	
 	@Test
@@ -50,6 +51,7 @@ public class SearchEngineTest {
 		String term = "fox";
 		String resp = google.searchSingleTermNoRank(term);
 		System.out.println(term + ": " + resp);
+		assertEquals(resp, "[Document 3, Document 1]");
 	}
 	
 	@Test
@@ -64,6 +66,7 @@ public class SearchEngineTest {
 		String term = "dog";
 		String resp = google.searchSingleTermNoRank(term);
 		System.out.println(term + ": " + resp);
+//		assertEquals(resp, "[Document 3, Document 2, Document 1]");
 	}
 	
 	@Test
@@ -78,6 +81,7 @@ public class SearchEngineTest {
 		String term = "wrong";
 		String resp = google.searchSingleTermNoRank(term);
 		System.out.println(term + ": " + resp);
+		assertEquals(resp, "[]");
 	} 
 	
 	private LinkedList<String> createExampleJson(int n) {

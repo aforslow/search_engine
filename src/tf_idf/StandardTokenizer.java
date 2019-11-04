@@ -9,6 +9,7 @@ public class StandardTokenizer extends Tokenizer {
 	/**
 	 * Returns a tokenized linkedlist of a document.
 	 * Splitting of tokens is based on word boundaries
+	 * (e.g. .,!;)
 	 */
 	@Override
 	public LinkedList<Token> tokenize(String document) {
