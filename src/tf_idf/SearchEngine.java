@@ -84,7 +84,7 @@ public class SearchEngine implements ISearchEngine {
 
 	/**
 	 * Returns a list of documents matching term. Each document is ranked by tf-idf.
-	 * NOTE: rank is not included in return string
+	 * NOTE: rank is not included in return string. This method is good for unit testing.
 	 * @param term: The search term. Has to be single word.
 	 * @return queryAnswer: the stringified list of documents matching term.
 	 */
