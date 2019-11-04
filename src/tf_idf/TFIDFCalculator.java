@@ -12,9 +12,11 @@ public class TFIDFCalculator {
 	}
 	
 	public double calculateTF(Token token, Document document) {
-		double rawCount = document.getTokenRawFrequency(token);
-		double nWords = document.getNWords();
-		return rawCount / nWords;
+		TFTerm tfTerm = new TFFactory().getTFCalculator("documentNormalization");
+		return tfTerm.calculate(token, document);
+//		double rawCount = document.getTokenRawFrequency(token);
+//		double nWords = document.getNWords();
+//		return rawCount / nWords;
 	}
 	
 	public double calculateIDF(Token token, LinkedList<Document> documentSet) {
@@ -33,20 +35,21 @@ public class TFIDFCalculator {
 		return nDocsContainingToken;
 	}
 	
+	
 	public LinkedList<DocumentRankTuple> sortDocumentsTFIDF(Token token, 
-			LinkedList<Document> documentList, 
-			LinkedList<Document> documentSet) {
-		LinkedList<DocumentRankTuple> drts = generateDocumentRankTuples(token, documentList, documentSet);
+			LinkedList<Document> documentListToSort, 
+			LinkedList<Document> completeDocumentSet) {
+		LinkedList<DocumentRankTuple> drts = generateDocumentRankTuples(token, documentListToSort, completeDocumentSet);
 		Collections.sort(drts);
 		return drts;
 	}
 	
 	private LinkedList<DocumentRankTuple> generateDocumentRankTuples(Token token, 
-			LinkedList<Document> documentList,
-			LinkedList<Document> documentSet) {
+			LinkedList<Document> documentListToSort,
+			LinkedList<Document> completeDocumentSet) {
 		LinkedList<DocumentRankTuple> drts = new LinkedList<DocumentRankTuple>();
-		for (Document d : documentList) {
-			double tfidf = calculateTFIDF(token, d, documentSet);
+		for (Document d : documentListToSort) {
+			double tfidf = calculateTFIDF(token, d, completeDocumentSet);
 			DocumentRankTuple drt = new DocumentRankTuple(d, tfidf);
 			drts.add(drt);
 		}

@@ -25,6 +25,12 @@ public class SearchEngine implements ISearchEngine {
 		this.invertedIndexTable = new InvertedIndexTable(documents);
 	}
 	
+	/**
+	 * Adds multiple documents to inverted table and
+	 * updates the document ranking according to tf-idf
+	 * @param rawJsonDocuments: The list of documents represented
+	 * as json strings
+	 */
 	public void addDocuments(LinkedList<String> rawJsonDocuments) {
 		for (String rawJsonDocument : rawJsonDocuments) {
 			Document newDoc = new Document(rawJsonDocument);
@@ -36,7 +42,7 @@ public class SearchEngine implements ISearchEngine {
 
 	/**
 	 * Adds single document to inverted table and
-	 * updates the mapping according to TFIDF.
+	 * updates the document ranking according to tf-idf.
 	 * Do not use this method for multiple uploads;
 	 * use addDocuments instead
 	 * @param rawJsonDocument: The document represented as a json string
