@@ -1,0 +1,16 @@
+{
+    "documents": [
+        {
+            "title": "Document 1", 
+            "content": "The brown fox jumped over the brown dog."
+        },
+        {
+            "title": "Document 2", 
+            "content": "The lazy brown dog, sat in the corner"
+        },
+        {
+            "title": "Document 3", 
+            "content": "The Red Fox bit the lazy dog cat!"
+        }
+    ]
+}
