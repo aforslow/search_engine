@@ -49,7 +49,10 @@ public class UserInterface {
 	}
 	
 	private void processUserInput(String userInput) {
-		if (userInput.contentEquals("quit()")) quit();
+		if (userInput.contentEquals("quit()")) {
+			quit();
+			return;
+		}
 		
 		String res = this.searchEngine.searchSingleTermWithRank(userInput);
 	    System.out.println("Result: " + res);  // Output user input
